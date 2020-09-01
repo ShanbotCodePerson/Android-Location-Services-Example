@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
-import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -29,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private val mLocationSettingsRequest: LocationSettingsRequest? = null
     private val REQUEST_CHECK_SETTINGS = 214
-    private val REQUEST_ENABLE_GPS = 516
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,5 +143,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.d("SRD", "${requestCode} ${Integer.toString(resultCode)}")
     }
 }
